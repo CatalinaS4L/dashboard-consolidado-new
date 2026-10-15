@@ -1,422 +1,421 @@
-/*New Consolidado*/
+/* New Consolidado */
 
-/* --- 1. VARIABLES DE COLOR Y CONFIGURACIÓN GLOBAL --- /
+/* --- 1. VARIABLES DE COLOR Y CONFIGURACIÓN GLOBAL --- */
 :root {
-/ Marca / Colores Primarios */
---color-primary: #06b706;
---color-primary-hover: #059e05;
---color-primary-active: #048604;
---color-primary-light: #f1fcf8;
---color-primary-accent: #d0f6d0;
---color-primary-hover-accent: #abe8ab;
---color-primary-border: rgba(6, 183, 6, 0.32);
+  /* Marca / Colores Primarios */
+  --color-primary: #06b706;
+  --color-primary-hover: #059e05;
+  --color-primary-active: #048604;
+  --color-primary-light: #f1fcf8;
+  --color-primary-accent: #d0f6d0;
+  --color-primary-hover-accent: #abe8ab;
+  --color-primary-border: rgba(6, 183, 6, 0.32);
 
-/* Estado Rojo / Riesgo Crítico */
---color-red-main: #ff4444;
---color-red-hover: #ff1111;
---color-red-active: #cd0000;
---color-red-bg: #fee2e2;
---color-red-text: #991b1b;
+  /* Estado Rojo / Riesgo Crítico */
+  --color-red-main: #ff4444;
+  --color-red-hover: #ff1111;
+  --color-red-active: #cd0000;
+  --color-red-bg: #fee2e2;
+  --color-red-text: #991b1b;
 
-/* Estado Amarillo / Alerta / Advertencia */
---color-yellow-main: #ffb937;
---color-yellow-hover: #f4a134;
---color-yellow-bg: #fef3c7;
---color-yellow-text: #92400e;
+  /* Estado Amarillo / Alerta / Advertencia */
+  --color-yellow-main: #ffb937;
+  --color-yellow-hover: #f4a134;
+  --color-yellow-bg: #fef3c7;
+  --color-yellow-text: #92400e;
 
-/* Estado Azul / Regular */
---color-blue-main: #3b82f6;
---color-blue-hover: #2563eb;
---color-blue-active: #1a48ca;
+  /* Estado Azul / Regular */
+  --color-blue-main: #3b82f6;
+  --color-blue-hover: #2563eb;
+  --color-blue-active: #1a48ca;
 
-/* Estado Morado / KPIs */
---color-purple-main: #8b5cf6;
---color-purple-value: #7e49f5;
+  /* Estado Morado / KPIs */
+  --color-purple-main: #8b5cf6;
+  --color-purple-value: #7e49f5;
 
-/* Fondos y Neutros */
---bg-body: #f4f6f9;
---bg-card: #ffffff;
---text-dark: #333333;
---text-muted: rgba(0, 0, 0, 0.5);
---border-light: #cccccc;
---border-subtle: #e2e8f0;
+  /* Fondos y Neutros */
+  --bg-body: #f4f6f9;
+  --bg-card: #ffffff;
+  --text-dark: #333333;
+  --text-muted: rgba(0, 0, 0, 0.5);
+  --border-light: #cccccc;
+  --border-subtle: #e2e8f0;
 
-/* Sombras */
---shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
---shadow-deep: 0 2px 8px rgba(0, 0, 0, 0.25);
+  /* Sombras */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-deep: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* --- 2. RESET Y BASES --- */
-
-{
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-background-color: var(--bg-body);
-color: var(--text-dark);
-padding-bottom: 40px;
-line-height: 1.5;
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  padding-bottom: 40px;
+  line-height: 1.5;
 }
 
 /* --- 3. ENCABEZADO Y CONTENEDOR PRINCIPAL --- */
 .header {
-background-color: var(--color-primary);
-color: #ffffff;
-padding: 24px 32px;
-text-align: center;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 24px 32px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
-font-size: 1.8rem;
-margin-bottom: 6px;
-font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+  font-weight: 700;
 }
 
 .container {
-max-width: 1280px;
-margin: 24px auto;
-padding: 0 16px;
+  max-width: 1280px;
+  margin: 24px auto;
+  padding: 0 16px;
 }
 
 /* --- 4. TARJETAS DE CONTENIDO Y FILTROS --- */
 .filters-card,
 .table-card {
-background: var(--bg-card);
-border-radius: 8px;
-padding: 20px;
-margin-bottom: 24px;
-box-shadow: var(--shadow-card);
-border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-subtle);
 }
 
 .filters-card h2,
 .table-card h2 {
-font-size: 1.2rem;
-margin-bottom: 16px;
-color: var(--text-dark);
-font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+  font-weight: 600;
 }
 
 .filters-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 }
 
 .filters-grid label {
-display: block;
-font-size: 0.85rem;
-font-weight: 600;
-margin-bottom: 6px;
-color: var(--color-primary);
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-primary);
 }
 
 .filters-grid select,
 .filters-grid input[type="text"] {
-width: 100%;
-padding: 8px 12px;
-border: 1px solid var(--border-light);
-border-radius: 4px;
-outline: none;
-font-size: 0.9rem;
-background-color: #ffffff;
-transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  outline: none;
+  font-size: 0.9rem;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .filters-grid input[type="text"]:focus,
 .filters-grid select:focus {
-border-color: var(--color-blue-main);
-box-shadow: 0 0 0 2px var(--color-primary-accent);
+  border-color: var(--color-blue-main);
+  box-shadow: 0 0 0 2px var(--color-primary-accent);
 }
 
 /* Acciones e Interacciones en Filtros */
 .filter-actions-container {
-display: flex;
-gap: 10px;
-align-items: center;
-margin-top: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
 }
 
 .btn-filter,
 .btn-pdf {
-padding: 10px 16px;
-border: none;
-border-radius: 6px;
-font-weight: 600;
-cursor: pointer;
-background-color: var(--color-yellow-main);
-color: #000000;
-white-space: nowrap;
-transition: background-color 0.2s ease, opacity 0.2s ease;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--color-yellow-main);
+  color: #000000;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .btn-filter:hover,
 .btn-pdf:hover {
-background-color: var(--color-yellow-hover);
+  background-color: var(--color-yellow-hover);
 }
 
 .btn-filter:disabled,
 .btn-pdf:disabled {
-opacity: 0.6;
-cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* --- 5. NAVEGACIÓN Y PESTAÑAS (TABS) --- */
 .tabs-container {
-display: flex;
-gap: 10px;
-margin-bottom: 20px;
-flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .tab-button {
-padding: 10px 20px;
-background-color: var(--color-primary-accent);
-border: none;
-border-radius: 6px;
-font-weight: bold;
-color: var(--text-dark);
-cursor: pointer;
-transition: all 0.2s ease;
+  padding: 10px 20px;
+  background-color: var(--color-primary-accent);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .tab-button.active {
-background-color: var(--color-primary);
-color: #ffffff;
+  background-color: var(--color-primary);
+  color: #ffffff;
 }
 
 .tab-button:hover:not(.active) {
-background-color: var(--color-primary-hover-accent);
+  background-color: var(--color-primary-hover-accent);
 }
 
 /* Subpestañas */
 .subtab-button {
-padding: 6px 14px;
-background-color: var(--color-primary-light);
-border: 1px solid var(--color-primary);
-border-radius: 4px;
-font-size: 0.85rem;
-font-weight: 600;
-color: var(--color-primary);
-cursor: pointer;
-transition: all 0.2s ease;
+  padding: 6px 14px;
+  background-color: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .subtab-button.active {
-background-color: var(--color-primary-hover);
-color: #ffffff;
-border-color: var(--color-primary-active);
+  background-color: var(--color-primary-hover);
+  color: #ffffff;
+  border-color: var(--color-primary-active);
 }
 
 .subtab-button:hover:not(.active) {
-background-color: var(--color-primary-accent);
-color: var(--color-primary);
+  background-color: var(--color-primary-accent);
+  color: var(--color-primary);
 }
 
 /* --- 6. TABLAS DE DATOS --- */
 .table-header-flex {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 16px;
-flex-wrap: wrap;
-gap: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .table-header-flex h2 {
-margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .table-wrapper {
-overflow-x: auto;
-border-radius: 4px;
+  overflow-x: auto;
+  border-radius: 4px;
 }
 
 table {
-width: 100%;
-border-collapse: collapse;
-margin-top: 8px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
 }
 
 th, td {
-padding: 12px 14px;
-text-align: left;
-border-bottom: 1px solid var(--color-primary-border);
-font-size: 0.9rem;
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-primary-border);
+  font-size: 0.9rem;
 }
 
 th {
-background-color: var(--color-primary-light);
-color: var(--text-dark);
-font-weight: 600;
-cursor: pointer;
-user-select: none;
-transition: background-color 0.2s ease;
+  background-color: var(--color-primary-light);
+  color: var(--text-dark);
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
 }
 
 tr:hover {
-background-color: var(--color-primary-light);
+  background-color: var(--color-primary-light);
 }
 
 th:hover {
-background-color: var(--color-primary-accent);
+  background-color: var(--color-primary-accent);
 }
 
 /* --- 7. BOTONES DE FILTRO DE FOCO/RIESGO --- */
 .btn-risk {
-background-color: var(--color-red-main);
-color: #ffffff;
-border: none;
-padding: 8px 12px;
-border-radius: 4px;
-cursor: pointer;
-font-weight: bold;
-transition: background 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--color-red-main);
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-risk:hover {
-background-color: var(--color-red-hover);
+  background-color: var(--color-red-hover);
 }
 
 .btn-risk.active {
-background-color: var(--color-red-active);
-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-border: 1px solid #000000;
+  background-color: var(--color-red-active);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
 }
 
 .btn-green {
-background-color: var(--color-primary);
-color: #ffffff;
-border: none;
-padding: 8px 12px;
-border-radius: 4px;
-cursor: pointer;
-font-weight: bold;
-transition: background 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-green:hover {
-background-color: var(--color-primary-hover);
+  background-color: var(--color-primary-hover);
 }
 
 .btn-green.active {
-background-color: var(--color-primary-active);
-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-border: 1px solid #000000;
+  background-color: var(--color-primary-active);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
 }
 
 .btn-regular {
-background-color: var(--color-blue-main);
-color: #ffffff;
-border: none;
-padding: 8px 12px;
-border-radius: 4px;
-cursor: pointer;
-font-weight: bold;
-transition: background 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--color-blue-main);
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-regular:hover {
-background-color: var(--color-blue-hover);
+  background-color: var(--color-blue-hover);
 }
 
 .btn-regular.active {
-background-color: var(--color-blue-active);
-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-border: 1px solid #000000;
+  background-color: var(--color-blue-active);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
 }
 
-/* --- 8. BADGES Y PUNTOS DE ESTADO --- /
-/ Indicadores en Punto (Semáforo) */
+/* --- 8. BADGES Y PUNTOS DE ESTADO --- */
+/* Indicadores en Punto (Semáforo) */
 .status-dot {
-display: inline-block;
-width: 10px;
-height: 10px;
-border-radius: 50%;
-margin-right: 8px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
 }
 
 .dot-red {
-background-color: var(--color-red-main) !important;
--webkit-print-color-adjust: exact !important;
-print-color-adjust: exact !important;
+  background-color: var(--color-red-main) !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 
 .dot-yellow {
-background-color: var(--color-yellow-main) !important;
--webkit-print-color-adjust: exact !important;
-print-color-adjust: exact !important;
+  background-color: var(--color-yellow-main) !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 
 .dot-green {
-background-color: var(--color-primary) !important;
--webkit-print-color-adjust: exact !important;
-print-color-adjust: exact !important;
+  background-color: var(--color-primary) !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 
 /* Score Badges */
 .score-badge {
-display: inline-block;
-padding: 4px 10px;
-border-radius: 12px;
-font-weight: bold;
-font-size: 0.85em;
-text-align: center;
-min-width: 55px;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.85em;
+  text-align: center;
+  min-width: 55px;
 }
 
 .score-badge.red {
-background-color: var(--color-red-bg);
-color: var(--color-red-text);
-border: 1px solid var(--color-red-main);
+  background-color: var(--color-red-bg);
+  color: var(--color-red-text);
+  border: 1px solid var(--color-red-main);
 }
 
 .score-badge.yellow {
-background-color: var(--color-yellow-bg);
-color: var(--color-yellow-text);
-border: 1px solid var(--color-yellow-main);
+  background-color: var(--color-yellow-bg);
+  color: var(--color-yellow-text);
+  border: 1px solid var(--color-yellow-main);
 }
 
 .score-badge.green {
-background-color: #d1fae5;
-color: #065f46;
-border: 1px solid var(--color-primary);
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid var(--color-primary);
 }
 
 /* Mes Activo Badge */
 .active-month-badge {
-display: inline-block;
-padding: 3px 8px;
-background-color: #e2e8f0;
-border: 1px solid var(--border-light);
-border-radius: 5px;
-font-weight: 700;
-color: var(--text-dark);
-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  padding: 3px 8px;
+  background-color: #e2e8f0;
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* --- 9. SUMMARY CARDS (KPIs) --- */
 .summary-cards-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 16px;
-margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .summary-card {
-background: var(--bg-card);
-border-radius: 8px;
-padding: 16px 20px;
-box-shadow: var(--shadow-deep);
-border-left: 5px solid var(--color-yellow-main);
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: var(--shadow-deep);
+  border-left: 5px solid var(--color-yellow-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .summary-card.border-red { border-left-color: var(--color-red-main); }
@@ -425,18 +424,18 @@ justify-content: space-between;
 .summary-card.border-purple { border-left-color: var(--color-purple-main); }
 
 .summary-card-title {
-font-size: 0.85rem;
-font-weight: 600;
-color: var(--text-dark);
-text-transform: uppercase;
-letter-spacing: 0.5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .summary-card-value {
-font-size: 1.8rem;
-font-weight: 700;
-color: var(--color-yellow-hover);
-margin: 6px 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-yellow-hover);
+  margin: 6px 0;
 }
 
 .summary-card-value.text-red { color: var(--color-red-hover); }
@@ -445,91 +444,90 @@ margin: 6px 0;
 .summary-card-value.text-purple { color: var(--color-purple-value); }
 
 .summary-card-sub {
-font-size: 0.78rem;
-color: var(--text-muted);
-font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* --- 10. GRÁFICOS Y TARJETAS DE AGENTE --- */
 .agent-cards-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 20px;
 }
 
 .agent-trend-card,
 .chart-card {
-background: var(--bg-card);
-border-radius: 8px;
-padding: 16px;
-box-shadow: var(--shadow-deep);
-border: 1px solid var(--border-light);
-display: flex;
-flex-direction: column;
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--shadow-deep);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
 }
 
 .agent-trend-header {
-margin-bottom: 12px;
-border-bottom: 1px solid var(--border-subtle);
-padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 8px;
 }
 
 .agent-trend-header h3 {
-font-size: 1.1rem;
-color: var(--text-dark);
-margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin: 0;
 }
 
 .agent-chart-container {
-position: relative;
-height: 250px;
-width: 100%;
+  position: relative;
+  height: 250px;
+  width: 100%;
 }
 
 .chart-wrapper {
-position: relative;
-width: 100%;
-height: 400px;
+  position: relative;
+  width: 100%;
+  height: 400px;
 }
 
 .sessions-cards-grid {
-display: flex;
-flex-direction: column;
-gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .agent-session-card {
-background: var(--bg-card);
-border-radius: 8px;
-padding: 18px;
-box-shadow: 0 2px 5px var(--border-light);
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 2px 5px var(--border-light);
 }
 
 /* --- 11. REGLAS DE IMPRESIÓN --- */
 @media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 
-{
--webkit-print-color-adjust: exact !important;
-print-color-adjust: exact !important;
-}
+  body {
+    background-color: #ffffff;
+    padding-bottom: 0;
+  }
 
-body {
-background-color: #ffffff;
-padding-bottom: 0;
-}
+  .filters-card,
+  .tabs-container,
+  .btn-filter,
+  .btn-pdf {
+    display: none !important;
+  }
 
-.filters-card,
-.tabs-container,
-.btn-filter,
-.btn-pdf {
-display: none !important;
-}
-
-.summary-card,
-.table-card,
-.chart-card {
-box-shadow: none !important;
-border: 1px solid var(--border-light) !important;
-page-break-inside: avoid;
-}
+  .summary-card,
+  .table-card,
+  .chart-card {
+    box-shadow: none !important;
+    border: 1px solid var(--border-light) !important;
+    page-break-inside: avoid;
+  }
 }

@@ -1,141 +1,191 @@
-<!-- PESTAÑAS NAVEGACIÓN -->
-<div class="tabs-container">
-  <button class="tab-button active" onclick="switchTab('country-summary', event)">Resumen Comparativo Países</button>
-  <button class="tab-button" onclick="switchTab('country-trends', event)">Tendencias Históricas por País</button>
-  <button class="tab-button" onclick="switchTab('country-quality', event)">Calidad y Diagnóstico por País</button>
-</div>
+<!-- New Consolidado -->
 
-<!-- HEADER SUMMARY (KPI CARDS - ENFOQUE MACRO / PAÍS) -->
-<section class="summary-cards-grid">
-  <div class="summary-card border-green">
-    <div class="summary-card-title">País Líder del Mes</div>
-    <div class="summary-card-value text-green" id="kpi-top-country">-</div>
-    <div class="summary-card-sub" id="kpi-top-country-pct">Mayor % de Cumplimiento</div>
-  </div>
-  <div class="summary-card border-purple">
-    <div class="summary-card-title">Cumplimiento Regional Promedio</div>
-    <div class="summary-card-value text-purple" id="kpi-regional-compliance">-</div>
-    <div class="summary-card-sub">Promedio Ponderado Regional</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-card-title">Ventas Totales Consolidadas</div>
-    <div class="summary-card-value" id="kpi-total-sales">-</div>
-    <div class="summary-card-sub" id="kpi-total-meta">Meta Total: -</div>
-  </div>
-  <div class="summary-card border-red">
-    <div class="summary-card-title">Mayor Proporción Low Perf.</div>
-    <div class="summary-card-value text-red" id="kpi-critical-country">-</div>
-    <div class="summary-card-sub">% Agentes &lt; 50% de Meta</div>
-  </div>
-  <div class="summary-card border-blue">
-    <div class="summary-card-title">Nota Calidad Regional</div>
-    <div class="summary-card-value text-blue" id="kpi-avg-quality">-</div>
-    <div class="summary-card-sub">Promedio Diagnóstico Final</div>
-  </div>
-</section>
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Agentes Low Performance · CONSOLIDADO</title>
+  
+  <!-- FAVICON DEL MAPA -->
+  <link rel="icon" type="image/png" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f30e.png">
+  
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Librerías externas: PapaParse y Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Plugin de Anotaciones para las líneas objetivo -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.2/dist/chartjs-plugin-annotation.min.js"></script>
 
-<!-- BARRA DE FILTROS MACRO -->
-<section class="filters-card">
-  <h2>Filtros Regionales</h2>
-  <div class="filters-grid">
-    <div>
-      <label for="filter-pais">Filtrar por País:</label>
-      <select id="filter-pais">
-        <option value="todos">Todos los Países</option>
-      </select>
-    </div>
-    <div>
-      <label for="filter-mes">Filtrar por Mes:</label>
-      <select id="filter-mes">
-        <option value="todos">Todos los meses</option>
-      </select>
-    </div>
-    <div class="filter-actions-container" style="align-self: flex-end;">
-      <button id="btn-reset" type="button" class="btn-filter">Limpiar Filtros</button>
-      <button id="btn-export-pdf" type="button" class="btn-filter btn-pdf">Exportar a PDF</button>
-    </div>
-  </div>
-</section>
+  <!-- Librerías para exportar a PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-<!-- TAB 1: RESUMEN COMPARATIVO POR PAÍS -->
-<section id="tab-country-summary" class="table-card tab-content active">
-  <div class="table-header-flex">
-    <h2>Consolidado Comparativo por País</h2>
-  </div>
-  <div class="table-wrapper">
-    <table id="country-table">
-      <thead>
-        <tr>
-          <th onclick="handleSort('country-table', 'pais')">País</th>
-          <th onclick="handleSort('country-table', 'totalAgentes')">Total Agentes</th>
-          <th onclick="handleSort('country-table', 'metaTotal')">Meta Consolidada</th>
-          <th onclick="handleSort('country-table', 'cierreTotal')">Ventas Totales (Cierre)</th>
-          <th onclick="handleSort('country-table', 'cumplimientoPct')">% Cumplimiento</th>
-          <th onclick="handleSort('country-table', 'pctLowPerf')">% Low Performance (&lt;50%)</th>
-          <th onclick="handleSort('country-table', 'promedioCalidad')">Promedio Calidad</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</section>
+</head>
+<body>
 
-<!-- TAB 2: TENDENCIAS HISTÓRICAS POR PAÍS -->
-<section id="tab-country-trends" class="tab-content" style="display: none;">
-  <!-- Gráfico 1: Evolución del % de Cumplimiento por País -->
-  <div class="chart-card" style="margin-bottom: 24px;">
-    <h2>Evolución del % Cumplimiento por País (Mes a Mes)</h2>
-    <div class="chart-wrapper">
-      <canvas id="chartCumplimientoPorPais"></canvas>
-    </div>
-  </div>
+  <!-- Encabezado / Header -->
+  <header class="header">
+    <h1>
+      UTEL · Dashboard Agentes Low Performance
+      <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f30e.png" alt="Mapa" style="vertical-align: middle; height: 26px; margin-left: 8px; border-radius: 2px;">
+    </h1>
+    <p>
+      Seguimiento & Coaching — CONSOLIDADO 
+      <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f30e.png" alt="Mapa" style="vertical-align: middle; height: 14px; margin-left: 4px; border-radius: 2px;">
+    </p>
+  </header>
 
-  <!-- Gráfico 2: Ventas vs Meta Ponderada por País -->
-  <div class="chart-card" style="margin-bottom: 24px;">
-    <h2>Volumen de Ventas Totales vs. Meta por País</h2>
-    <div class="chart-wrapper">
-      <canvas id="chartVentasPorPais"></canvas>
-    </div>
-  </div>
+  <main class="container">
 
-  <!-- Gráfico 3: Distribución del Nivel de Desempeño por País -->
-  <div class="chart-card">
-    <h2>Distribución de Agentes por Nivel de Cumplimiento (% por País)</h2>
-    <div class="chart-wrapper">
-      <canvas id="chartSemaforoPorPais"></canvas>
+    <!-- PESTAÑAS NAVEGACIÓN -->
+    <div class="tabs-container">
+      <button class="tab-button active" onclick="switchTab('country-summary', event)">Resumen Comparativo Países</button>
+      <button class="tab-button" onclick="switchTab('country-trends', event)">Tendencias Históricas por País</button>
+      <button class="tab-button" onclick="switchTab('country-quality', event)">Calidad y Diagnóstico por País</button>
     </div>
-  </div>
-</section>
+    
+    <!-- HEADER SUMMARY (KPI CARDS - ENFOQUE MACRO / PAÍS) -->
+    <section class="summary-cards-grid">
+      <div class="summary-card border-green">
+        <div class="summary-card-title">País Líder del Mes</div>
+        <div class="summary-card-value text-green" id="kpi-top-country">-</div>
+        <div class="summary-card-sub" id="kpi-top-country-pct">Mayor % de Cumplimiento</div>
+      </div>
+      <div class="summary-card border-purple">
+        <div class="summary-card-title">Cumplimiento Regional Promedio</div>
+        <div class="summary-card-value text-purple" id="kpi-regional-compliance">-</div>
+        <div class="summary-card-sub">Promedio Ponderado Regional</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">Ventas Totales Consolidadas</div>
+        <div class="summary-card-value" id="kpi-total-sales">-</div>
+        <div class="summary-card-sub" id="kpi-total-meta">Meta Total: -</div>
+      </div>
+      <div class="summary-card border-red">
+        <div class="summary-card-title">Mayor Proporción Low Perf.</div>
+        <div class="summary-card-value text-red" id="kpi-critical-country">-</div>
+        <div class="summary-card-sub">% Agentes &lt; 50% de Meta</div>
+      </div>
+      <div class="summary-card border-blue">
+        <div class="summary-card-title">Nota Calidad Regional</div>
+        <div class="summary-card-value text-blue" id="kpi-avg-quality">-</div>
+        <div class="summary-card-sub">Promedio Diagnóstico Final</div>
+      </div>
+    </section>
+    
+    <!-- BARRA DE FILTROS MACRO -->
+    <section class="filters-card">
+      <h2>Filtros Regionales</h2>
+      <div class="filters-grid">
+        <div>
+          <label for="filter-pais">Filtrar por País:</label>
+          <select id="filter-pais">
+            <option value="todos">Todos los Países</option>
+          </select>
+        </div>
+        <div>
+          <label for="filter-mes">Filtrar por Mes:</label>
+          <select id="filter-mes">
+            <option value="todos">Todos los meses</option>
+          </select>
+        </div>
+        <div class="filter-actions-container" style="align-self: flex-end;">
+          <button id="btn-reset" type="button" class="btn-filter">Limpiar Filtros</button>
+          <button id="btn-export-pdf" type="button" class="btn-filter btn-pdf">Exportar a PDF</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- TAB 1: RESUMEN COMPARATIVO POR PAÍS -->
+    <section id="tab-country-summary" class="table-card tab-content active">
+      <div class="table-header-flex">
+        <h2>Consolidado Comparativo por País</h2>
+      </div>
+      <div class="table-wrapper">
+        <table id="country-table">
+          <thead>
+            <tr>
+              <th onclick="handleSort('country-table', 'pais')">País</th>
+              <th onclick="handleSort('country-table', 'totalAgentes')">Total Agentes</th>
+              <th onclick="handleSort('country-table', 'metaTotal')">Meta Consolidada</th>
+              <th onclick="handleSort('country-table', 'cierreTotal')">Ventas Totales (Cierre)</th>
+              <th onclick="handleSort('country-table', 'cumplimientoPct')">% Cumplimiento</th>
+              <th onclick="handleSort('country-table', 'pctLowPerf')">% Low Performance (&lt;50%)</th>
+              <th onclick="handleSort('country-table', 'promedioCalidad')">Promedio Calidad</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+    
+    <!-- TAB 2: TENDENCIAS HISTÓRICAS POR PAÍS -->
+    <section id="tab-country-trends" class="tab-content" style="display: none;">
+      <!-- Gráfico 1: Evolución del % de Cumplimiento por País -->
+      <div class="chart-card" style="margin-bottom: 24px;">
+        <h2>Evolución del % Cumplimiento por País (Mes a Mes)</h2>
+        <div class="chart-wrapper">
+          <canvas id="chartCumplimientoPorPais"></canvas>
+        </div>
+      </div>
+    
+      <!-- Gráfico 2: Ventas vs Meta Ponderada por País -->
+      <div class="chart-card" style="margin-bottom: 24px;">
+        <h2>Volumen de Ventas Totales vs. Meta por País</h2>
+        <div class="chart-wrapper">
+          <canvas id="chartVentasPorPais"></canvas>
+        </div>
+      </div>
+    
+      <!-- Gráfico 3: Distribución del Nivel de Desempeño por País -->
+      <div class="chart-card">
+        <h2>Distribución de Agentes por Nivel de Cumplimiento (% por País)</h2>
+        <div class="chart-wrapper">
+          <canvas id="chartSemaforoPorPais"></canvas>
+        </div>
+      </div>
+    </section>
+    
+    <!-- TAB 3: CALIDAD Y DIAGNÓSTICO POR PAÍS -->
+    <section id="tab-country-quality" class="tab-content" style="display: none;">
+      <!-- Gráfico: Correlación Calidad vs Cumplimiento Agrupado por País -->
+      <div class="chart-card" style="margin-bottom: 24px;">
+        <h2>Matriz Regional: Calidad Diagnóstica vs. Cumplimiento por País</h2>
+        <div class="chart-wrapper" style="height: 400px;">
+          <canvas id="chartQualityVsPerformance"></canvas>
+        </div>
+      </div>
+    
+      <!-- Tabla Comparativa de Rubros de Calidad por País -->
+      <div class="table-card">
+        <h2>Desglose de Calidad y Habilidades Comerciales por País</h2>
+        <div class="table-wrapper">
+          <table id="country-diagnostic-table">
+            <thead>
+              <tr>
+                <th onclick="handleSort('country-diagnostic-table', 'pais')">País</th>
+                <th onclick="handleSort('country-diagnostic-table', 'notaHabilidades')">Hab. Comunicativas</th>
+                <th onclick="handleSort('country-diagnostic-table', 'notaSondeo')">Sondeo</th>
+                <th onclick="handleSort('country-diagnostic-table', 'notaPersonalizacion')">Personalización</th>
+                <th onclick="handleSort('country-diagnostic-table', 'notaObjeciones')">Manejo Objeciones</th>
+                <th onclick="handleSort('country-diagnostic-table', 'notaCierre')">Nota Cierre</th>
+                <th onclick="handleSort('country-diagnostic-table', 'notaFinal')">Nota Final Calidad</th>
+                <th onclick="handleSort('country-diagnostic-table', 'cumplimientoPct')">Cumplimiento %</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
-<!-- TAB 3: CALIDAD Y DIAGNÓSTICO POR PAÍS -->
-<section id="tab-country-quality" class="tab-content" style="display: none;">
-  <!-- Gráfico: Correlación Calidad vs Cumplimiento Agrupado por País -->
-  <div class="chart-card" style="margin-bottom: 24px;">
-    <h2>Matriz Regional: Calidad Diagnóstica vs. Cumplimiento por País</h2>
-    <div class="chart-wrapper" style="height: 400px;">
-      <canvas id="chartQualityVsPerformance"></canvas>
-    </div>
-  </div>
+  </main>
 
-  <!-- Tabla Comparativa de Rubros de Calidad por País -->
-  <div class="table-card">
-    <h2>Desglose de Calidad y Habilidades Comerciales por País</h2>
-    <div class="table-wrapper">
-      <table id="country-diagnostic-table">
-        <thead>
-          <tr>
-            <th onclick="handleSort('country-diagnostic-table', 'pais')">País</th>
-            <th onclick="handleSort('country-diagnostic-table', 'notaHabilidades')">Hab. Comunicativas</th>
-            <th onclick="handleSort('country-diagnostic-table', 'notaSondeo')">Sondeo</th>
-            <th onclick="handleSort('country-diagnostic-table', 'notaPersonalizacion')">Personalización</th>
-            <th onclick="handleSort('country-diagnostic-table', 'notaObjeciones')">Manejo Objeciones</th>
-            <th onclick="handleSort('country-diagnostic-table', 'notaCierre')">Nota Cierre</th>
-            <th onclick="handleSort('country-diagnostic-table', 'notaFinal')">Nota Final Calidad</th>
-            <th onclick="handleSort('country-diagnostic-table', 'cumplimientoPct')">Cumplimiento %</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-</section>
+  <script src="script.js"></script>
+</body>
+</html>
+
