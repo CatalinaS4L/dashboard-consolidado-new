@@ -77,7 +77,7 @@
       </div>
     </section>
     
-    <!-- BARRA DE FILTROS MACRO -->
+    <!-- BARRA DE FILTROS -->
     <section class="filters-card">
       <h2>Filtros Regionales</h2>
       <div class="filters-grid">
@@ -91,6 +91,12 @@
           <label for="filter-mes">Filtrar por Mes:</label>
           <select id="filter-mes">
             <option value="todos">Todos los meses</option>
+          </select>
+        </div>
+        <div>
+          <label for="filter-status">Status Agente:</label>
+          <select id="filter-status">
+            <option value="todos">Todos los Status</option>
           </select>
         </div>
         <div class="filter-actions-container" style="align-self: flex-end;">
@@ -115,7 +121,7 @@
               <th onclick="handleSort('country-table', 'cierreTotal')">Ventas Totales (Cierre)</th>
               <th onclick="handleSort('country-table', 'cumplimientoPct')">% Cumplimiento</th>
               <th onclick="handleSort('country-table', 'pctLowPerf')">% Low Performance (&lt;50%)</th>
-              <th onclick="handleSort('country-table', 'promedioCalidad')">Promedio Calidad</th>
+              <th onclick="handleSort('country-table', 'notaFinal')">Promedio Calidad</th>
             </tr>
           </thead>
           <tbody></tbody>

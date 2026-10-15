@@ -164,6 +164,41 @@ function populateMonthSelector() {
   }
 }
 
+function populateStatusSelector() {
+  const selectStatus = document.getElementById('filter-status');
+  if (!selectStatus) return;
+
+  const currentVal = selectStatus.value || 'todos';
+  
+  // Extraer valores únicos de STATUS AGENTE de la data disponible
+  const statusesSet = new Set();
+  rawData.forEach(row => {
+    const st = getRowValue(row, 'STATUS AGENTE');
+    if (st && st !== '-') statusesSet.add(st.toUpperCase());
+  });
+
+  const statusesList = Array.from(statusesSet).sort();
+
+  selectStatus.innerHTML = '<option value="todos">Todos los Status</option>';
+  statusesList.forEach(st => {
+    const option = document.createElement('option');
+    option.value = st;
+    option.textContent = st;
+    selectStatus.appendChild(option);
+  });
+
+  if (statusesList.includes(currentVal)) {
+    selectStatus.value = currentVal;
+  } else {
+    selectStatus.value = 'todos';
+  }
+
+  if (!selectStatus.dataset.hasListener) {
+    selectStatus.addEventListener('change', filterData);
+    selectStatus.dataset.hasListener = "true";
+  }
+}
+
 async function preloadAllMonths() {
   const monthKeys = getActiveMonthKeys();
   if (monthKeys.length === 0) return;
@@ -209,15 +244,22 @@ function loadDashboardData() {
     rawData = allMonthsData[selectedMonth] || [];
   }
 
+  populateStatusSelector();
   filterData();
 }
 
 function filterData() {
   const selectedPaisVal = document.getElementById('filter-pais')?.value || 'todos';
+  const selectedStatusVal = document.getElementById('filter-status')?.value || 'todos';
 
   filteredData = rawData.filter(item => {
     const country = item._PAIS_ORIGEN || '';
-    return selectedPaisVal === 'todos' || country === selectedPaisVal;
+    const status = getRowValue(item, 'STATUS AGENTE').toUpperCase();
+
+    const matchCountry = selectedPaisVal === 'todos' || country === selectedPaisVal;
+    const matchStatus = selectedStatusVal === 'todos' || status === selectedStatusVal.toUpperCase();
+
+    return matchCountry && matchStatus;
   });
 
   renderAllTables();
@@ -229,6 +271,9 @@ function resetAllFilters() {
 
   const selectMes = document.getElementById('filter-mes');
   if (selectMes) selectMes.value = 'todos';
+
+  const selectStatus = document.getElementById('filter-status');
+  if (selectStatus) selectStatus.value = 'todos';
 
   selectedCountry = 'todos';
   loadDashboardData();
@@ -299,7 +344,8 @@ function getCountryAggregatedData(data) {
     notaPersonalizacion: c.countPers > 0 ? (c.sumPers / c.countPers) : 0,
     notaObjeciones: c.countObj > 0 ? (c.sumObj / c.countObj) : 0,
     notaCierre: c.countCierreNota > 0 ? (c.sumCierreNota / c.countCierreNota) : 0,
-    notaFinal: c.countCalidad > 0 ? (c.sumCalidad / c.countCalidad) : 0
+    notaFinal: c.countCalidad > 0 ? (c.sumCalidad / c.countCalidad) : 0,
+    promedioCalidad: c.countCalidad > 0 ? (c.sumCalidad / c.countCalidad) : 0
   }));
 }
 
@@ -438,7 +484,14 @@ function renderCountryTrends() {
   // 1. Gráfico de Evolución de Cumplimiento
   const datasetsCumpl = countries.map(country => {
     const dataPoints = monthKeys.map(month => {
-      const rows = (allMonthsData[month] || []).filter(r => (r._PAIS_ORIGEN || '') === country);
+      const selectedStatusVal = document.getElementById('filter-status')?.value || 'todos';
+      const rows = (allMonthsData[month] || []).filter(r => {
+        const matchCountry = (r._PAIS_ORIGEN || '') === country;
+        const st = getRowValue(r, 'STATUS AGENTE').toUpperCase();
+        const matchStatus = selectedStatusVal === 'todos' || st === selectedStatusVal.toUpperCase();
+        return matchCountry && matchStatus;
+      });
+
       const meta = rows.reduce((s, r) => s + parseNum(getRowValue(r, 'META')), 0);
       const cierre = rows.reduce((s, r) => s + parseNum(getRowValue(r, 'CIERRE')), 0);
       return meta > 0 ? parseFloat(((cierre / meta) * 100).toFixed(1)) : 0;
@@ -500,7 +553,7 @@ function renderCountryTrends() {
       data: {
         labels: countryLabels,
         datasets: [
-          { label: 'VentasTotales (Cierre)', data: ventasData, backgroundColor: '#10b981', borderRadius: 4 },
+          { label: 'Ventas Totales (Cierre)', data: ventasData, backgroundColor: '#10b981', borderRadius: 4 },
           { label: 'Meta Consolidada', data: metaData, backgroundColor: '#ff4444', borderRadius: 4 }
         ]
       },
@@ -700,11 +753,36 @@ async function exportCurrentViewToPDF() {
     const tabTitle = activeTabBtn ? activeTabBtn.textContent.trim() : 'Reporte';
     const activeTabContainer = document.querySelector('.tab-content:not([style*="display: none"])') || document.body;
 
-    doc.setFontSize(14);
-    doc.setTextColor(30, 41, 59);
-    doc.text(`Reporte Macro Regional (${selectedCountry}): ${tabTitle}`, 14, 12);
+    // 1. Obtener los textos seleccionados en todos los filtros
+    const selectPais = document.getElementById('filter-pais');
+    const selectMes = document.getElementById('filter-mes');
+    const selectStatus = document.getElementById('filter-status');
 
-    let currentY = 22;
+    const paisText = selectPais && selectPais.selectedIndex >= 0 
+      ? selectPais.options[selectPais.selectedIndex].text 
+      : 'Todos los Países';
+      
+    const mesText = selectMes && selectMes.selectedIndex >= 0 
+      ? selectMes.options[selectMes.selectedIndex].text 
+      : 'Todos los meses';
+
+    const statusText = selectStatus && selectStatus.selectedIndex >= 0 
+      ? selectStatus.options[selectStatus.selectedIndex].text 
+      : 'Todos los Status';
+
+    // 2. Encabezado del PDF
+    doc.setFontSize(14);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(30, 41, 59);
+    doc.text(`Reporte Macro Regional: ${tabTitle}`, 14, 12);
+
+    // 3. Subtítulo con Filtros
+    doc.setFontSize(9);
+    doc.setFont(undefined, 'normal');
+    doc.setTextColor(100, 116, 139);
+    doc.text(`Filtros aplicados — País: ${paisText}  |  Mes: ${mesText}  |  Status: ${statusText}`, 14, 18);
+
+    let currentY = 24;
 
     const visualBlocks = Array.from(activeTabContainer.querySelectorAll('.chart-card, .summary-cards-grid'));
 
@@ -754,7 +832,11 @@ async function exportCurrentViewToPDF() {
       currentY = doc.lastAutoTable.finalY + 8;
     });
 
-    doc.save(`Reporte_Consolidado_${selectedCountry}_${new Date().toISOString().slice(0, 10)}.pdf`);
+    const paisClean = paisText.replace(/\s+/g, '_');
+    const mesClean = mesText.replace(/\s+/g, '_');
+    const statusClean = statusText.replace(/\s+/g, '_');
+    doc.save(`Reporte_${paisClean}_${mesClean}_${statusClean}_${new Date().toISOString().slice(0, 10)}.pdf`);
+
   } catch (err) {
     console.error('Error al exportar PDF:', err);
   } finally {
