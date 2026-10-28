@@ -11,7 +11,8 @@ const COUNTRY_MONTH_URLS = {
     junio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSqTQitnK8fqCABAnYc68gmx3RQM2e6qmnlNcxryZ_amvWo9gJLlOEVb82mxylpQZz9uROVe9l81OmF/pub?gid=632786864&single=true&output=csv`,
     julio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSqTQitnK8fqCABAnYc68gmx3RQM2e6qmnlNcxryZ_amvWo9gJLlOEVb82mxylpQZz9uROVe9l81OmF/pub?gid=264290748&single=true&output=csv`,
     agosto: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSqTQitnK8fqCABAnYc68gmx3RQM2e6qmnlNcxryZ_amvWo9gJLlOEVb82mxylpQZz9uROVe9l81OmF/pub?gid=1822972942&single=true&output=csv`,
-    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSqTQitnK8fqCABAnYc68gmx3RQM2e6qmnlNcxryZ_amvWo9gJLlOEVb82mxylpQZz9uROVe9l81OmF/pub?gid=1684652595&single=true&output=csv`
+    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSqTQitnK8fqCABAnYc68gmx3RQM2e6qmnlNcxryZ_amvWo9gJLlOEVb82mxylpQZz9uROVe9l81OmF/pub?gid=1684652595&single=true&output=csv`,
+    octubre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSqTQitnK8fqCABAnYc68gmx3RQM2e6qmnlNcxryZ_amvWo9gJLlOEVb82mxylpQZz9uROVe9l81OmF/pub?gid=363527355&single=true&output=csv`
   },
   "Ecuador": {
     febrero: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSkQSOQez8QahZZaVSPTXSTJZSNi8DC3mGSEL4AAdlzIpj169XVFi_AuVpUJ5uQJpmZ4weWLyAPzazh/pub?gid=0&single=true&output=csv`,
@@ -21,7 +22,8 @@ const COUNTRY_MONTH_URLS = {
     junio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSkQSOQez8QahZZaVSPTXSTJZSNi8DC3mGSEL4AAdlzIpj169XVFi_AuVpUJ5uQJpmZ4weWLyAPzazh/pub?gid=1230562695&single=true&output=csv`,
     julio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSkQSOQez8QahZZaVSPTXSTJZSNi8DC3mGSEL4AAdlzIpj169XVFi_AuVpUJ5uQJpmZ4weWLyAPzazh/pub?gid=1034655502&single=true&output=csv`,
     agosto: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSkQSOQez8QahZZaVSPTXSTJZSNi8DC3mGSEL4AAdlzIpj169XVFi_AuVpUJ5uQJpmZ4weWLyAPzazh/pub?gid=833072153&single=true&output=csv`,
-    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSkQSOQez8QahZZaVSPTXSTJZSNi8DC3mGSEL4AAdlzIpj169XVFi_AuVpUJ5uQJpmZ4weWLyAPzazh/pub?gid=1748535358&single=true&output=csv`
+    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSkQSOQez8QahZZaVSPTXSTJZSNi8DC3mGSEL4AAdlzIpj169XVFi_AuVpUJ5uQJpmZ4weWLyAPzazh/pub?gid=1748535358&single=true&output=csv`,
+    octubre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSkQSOQez8QahZZaVSPTXSTJZSNi8DC3mGSEL4AAdlzIpj169XVFi_AuVpUJ5uQJpmZ4weWLyAPzazh/pub?gid=125581480&single=true&output=csv`
   },
   "República Dominicana": {
     marzo: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSlK47Jfhz-MrQlFc-dZEH7NMOR61KdSLDfC83scipF55FrLuHC2WutieEgEICJlmVS-RYgpLbDuv_u/pub?gid=0&single=true&output=csv`,
@@ -30,7 +32,8 @@ const COUNTRY_MONTH_URLS = {
     junio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSlK47Jfhz-MrQlFc-dZEH7NMOR61KdSLDfC83scipF55FrLuHC2WutieEgEICJlmVS-RYgpLbDuv_u/pub?gid=1135519142&single=true&output=csv`,
     julio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSlK47Jfhz-MrQlFc-dZEH7NMOR61KdSLDfC83scipF55FrLuHC2WutieEgEICJlmVS-RYgpLbDuv_u/pub?gid=1312077769&single=true&output=csv`,
     agosto: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSlK47Jfhz-MrQlFc-dZEH7NMOR61KdSLDfC83scipF55FrLuHC2WutieEgEICJlmVS-RYgpLbDuv_u/pub?gid=1976446318&single=true&output=csv`,
-    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSlK47Jfhz-MrQlFc-dZEH7NMOR61KdSLDfC83scipF55FrLuHC2WutieEgEICJlmVS-RYgpLbDuv_u/pub?gid=1708978309&single=true&output=csv`
+    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSlK47Jfhz-MrQlFc-dZEH7NMOR61KdSLDfC83scipF55FrLuHC2WutieEgEICJlmVS-RYgpLbDuv_u/pub?gid=1708978309&single=true&output=csv`,
+    octubre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSlK47Jfhz-MrQlFc-dZEH7NMOR61KdSLDfC83scipF55FrLuHC2WutieEgEICJlmVS-RYgpLbDuv_u/pub?gid=1149168903&single=true&output=csv`
   },
   "Colombia": {
     abril: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwofts2AnxV2NWl1ThcGXsXBfnqVPElRlsh_8l8ZcD6aXX2W0spxisqC1HJBFQuUVIF9nbdfAXfe6/pub?gid=1320009300&single=true&output=csv`,
@@ -38,7 +41,8 @@ const COUNTRY_MONTH_URLS = {
     junio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwofts2AnxV2NWl1ThcGXsXBfnqVPElRlsh_8l8ZcD6aXX2W0spxisqC1HJBFQuUVIF9nbdfAXfe6/pub?gid=1132662885&single=true&output=csv`,
     julio: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwofts2AnxV2NWl1ThcGXsXBfnqVPElRlsh_8l8ZcD6aXX2W0spxisqC1HJBFQuUVIF9nbdfAXfe6/pub?gid=1916159240&single=true&output=csv`,
     agosto: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwofts2AnxV2NWl1ThcGXsXBfnqVPElRlsh_8l8ZcD6aXX2W0spxisqC1HJBFQuUVIF9nbdfAXfe6/pub?gid=1888744861&single=true&output=csv`,
-    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwofts2AnxV2NWl1ThcGXsXBfnqVPElRlsh_8l8ZcD6aXX2W0spxisqC1HJBFQuUVIF9nbdfAXfe6/pub?gid=230570935&single=true&output=csv`
+    septiembre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwofts2AnxV2NWl1ThcGXsXBfnqVPElRlsh_8l8ZcD6aXX2W0spxisqC1HJBFQuUVIF9nbdfAXfe6/pub?gid=230570935&single=true&output=csv`,
+    octubre: `https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwofts2AnxV2NWl1ThcGXsXBfnqVPElRlsh_8l8ZcD6aXX2W0spxisqC1HJBFQuUVIF9nbdfAXfe6/pub?gid=2104966256&single=true&output=csv`
   }
 };
 
